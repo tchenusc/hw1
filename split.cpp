@@ -12,10 +12,6 @@ the function below should be the only one in this file.
 
 #include "split.h"
 
-#include <iostream>
-
-using namespace std;
-
 /* Add a prototype for a helper function here if you need */
 
 void split(Node*& in, Node*& odds, Node*& evens)
@@ -23,25 +19,26 @@ void split(Node*& in, Node*& odds, Node*& evens)
   /* Add code here */
 // WRITE YOUR CODE HERE
     if (in == nullptr) return;
-    
-    // If the value is even
-    if (in->value % 2 == 0) evens = in;
-    else odds = in;
-    
-    splitHelper (in->next, odds, evens, odds, evens);
+
+    splitHelper (in, odds, evens, odds, evens);
     
     in = nullptr;
+    
 }
 
 /* If you needed a helper function, write it here */
 void splitHelper(Node* in, Node* oddsCurrent, Node* evensCurrent, Node*& oddsHead, Node*& evensHead)
 {
-    if (in == nullptr) return;
-    
-    cout << in->value;
+    if (in == nullptr) {
+        if (oddsHead == nullptr) return;
+        oddsCurrent->next = nullptr;
+        if (evensHead == nullptr) return;
+        evensCurrent->next = nullptr;
+        
+        return;
+    }
     if (in->value % 2 == 0)
     {
-        cout << " is even." << endl;
         if (evensCurrent == nullptr)
         {
             evensHead = in;
@@ -57,7 +54,6 @@ void splitHelper(Node* in, Node* oddsCurrent, Node* evensCurrent, Node*& oddsHea
     }
     else
     {
-        cout << " is odd." << endl;
         if (oddsCurrent == nullptr)
         {
             oddsHead = in;
