@@ -2,5 +2,6 @@ grade_split
 grade_ulliststr
 test_split
 test_ulliststr
+.DS_Store
 *.O
 *.exe
